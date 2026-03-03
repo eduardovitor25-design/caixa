@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relatório de Caixa</title>
+<title>Caixa Diário</title>
 
 <style>
 body{
     margin:0;
-    font-family: Arial, sans-serif;
+    font-family:Arial, sans-serif;
     background:#0f172a;
     color:white;
     text-align:center;
@@ -21,39 +21,45 @@ body{
 }
 
 h1{
+    margin:10px 0;
     font-size:20px;
-    margin-bottom:15px;
 }
 
-.meta{
+.meta-box{
     background:#1e293b;
     padding:12px;
     border-radius:12px;
     margin-bottom:15px;
 }
 
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
 .box{
     background:#1e293b;
     padding:10px;
-    margin:8px 0;
     border-radius:10px;
+    font-size:14px;
 }
 
 input{
-    width:95%;
-    padding:8px;
-    font-size:16px;
+    width:100%;
+    padding:6px;
+    margin-top:5px;
+    font-size:15px;
     text-align:center;
     border:none;
-    border-radius:8px;
-    margin-top:5px;
+    border-radius:6px;
 }
 
 .total{
     background:#334155;
     padding:12px;
     border-radius:12px;
-    margin-top:12px;
+    margin-top:15px;
     font-weight:bold;
 }
 
@@ -78,7 +84,6 @@ button{
     border-radius:8px;
     background:#3b82f6;
     color:white;
-    font-size:14px;
 }
 </style>
 </head>
@@ -87,13 +92,13 @@ button{
 
 <div class="container">
 
-<h1>Relatório de Venda</h1>
+<h1>Total Relatório</h1>
 
-<div class="meta">
-    <strong>Total esperado (Meta)</strong>
-    <input type="number" id="meta" oninput="calcular()">
+<div class="meta-box">
+<input type="number" id="meta" placeholder="Digite o valor total esperado" oninput="calcular()">
 </div>
 
+<div class="grid">
 <div class="box">Cartão
 <input type="number" id="c" oninput="calcular()"></div>
 
@@ -111,9 +116,10 @@ button{
 
 <div class="box">Faturar
 <input type="number" id="f" oninput="calcular()"></div>
+</div>
 
 <div class="total">
-Total Atual: R$ <span id="total">0.00</span>
+Soma Caixa: R$ <span id="total">0.00</span>
 </div>
 
 <div id="status"></div>
@@ -139,15 +145,15 @@ document.getElementById("total").innerText=total.toFixed(2);
 let statusDiv=document.getElementById("status");
 
 if(meta===0){
-    statusDiv.innerHTML="";
-    return;
+statusDiv.innerHTML="";
+return;
 }
 
 if(total===meta){
-    statusDiv.innerHTML="<div class='status-ok'>✅ Tudo certo 👍 Aura + Ego</div>";
+statusDiv.innerHTML="<div class='status-ok'>✅ Tudo certo 👍 Aura + Ego</div>";
 }else{
-    let diferenca=(meta-total).toFixed(2);
-    statusDiv.innerHTML="<div class='status-erro'>❌ Falta R$ "+diferenca+" 👎 olha direito aí</div>";
+let diferenca=(meta-total).toFixed(2);
+statusDiv.innerHTML="<div class='status-erro'>❌ Falta R$ "+diferenca+" 👎 olha direito aí</div>";
 }
 }
 
